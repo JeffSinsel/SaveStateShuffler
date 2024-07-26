@@ -38,4 +38,4 @@ jobs:
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "Add built distribution"
-        git push https://${{ secrets.PAT }}@github.com/JeffSinsel/shuffler.git HEAD:main
+        git push https://${{ secrets.PAT }}@github.com/JeffSinsel/SaveStateShuffler.git HEAD:main
