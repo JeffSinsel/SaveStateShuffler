@@ -59,23 +59,25 @@ for i in reversed(range(1,config.COUNTDOWN+1)):
         countdown_nums += str(i)
     else: 
         countdown_nums += f"{i}, "
-if os.path.exists("tts"):
-  shutil.rmtree("tts")
-os.makedirs("tts")
-myobj = gTTS(text=config.VOICE_TEXT_FINISH_SAVE, lang='en', slow=False)
-myobj.save("tts/finish_save.mp3")
-myobj = gTTS(text=config.VOICE_TEXT_LAST_SAVE, lang='en', slow=False)
-myobj.save("tts/last_save.mp3")
-myobj = gTTS(text=config.VOICE_TEXT_DONE, lang='en', slow=False)
-myobj.save("tts/done.mp3")
-myobj = gTTS(text=f"Starting in {countdown_nums}", lang='en', slow=False)
-myobj.save("tts/countdown.mp3")
-myobj = gTTS(text="Press Spacebar to Begin", lang='en', slow=False)
-myobj.save("tts/begin.mp3")
-myobj = gTTS(text="Game Paused", lang='en', slow=False)
-myobj.save("tts/paused.mp3")
-myobj = gTTS(text="Game Unpaused", lang='en', slow=False)
-myobj.save("tts/unpaused.mp3")
+tts_dict = {
+    "finish_save": config.VOICE_TEXT_FINISH_SAVE,
+    "last_save": config.VOICE_TEXT_LAST_SAVE,
+    "done": config.VOICE_TEXT_DONE,
+    "countdown": f"Starting in {countdown_nums}",
+    "begin": "Press Spacebar to Begin",
+    "paused": "Game Paused",
+    "unpaused": "Game Unpaused",
+}
+
+def tts(tts_dict, fresh = True, accent = "us"):
+    if fresh == True:
+        if os.path.exists("tts"):
+            shutil.rmtree("tts")
+        os.makedirs("tts")
+    for title, text in tts_dict.items():
+        gTTS(text=text, lang='en', slow=False, tld=accent).save(f"tts/{title}.mp3")
+
+tts(tts_dict)
 
 # Thread function for timer
 def print_elapsed_time():

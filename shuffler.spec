@@ -13,7 +13,7 @@ a = Analysis(
     noarchive=False,
     optimize=0,
 )
-a.datas += [('dougdoug.ico','./assets/dougdoug.ico','DATA')]
+a.datas += [('logo.ico','./assets/logo.ico','DATA')]
 pyz = PYZ(a.pure)
 
 exe = EXE(
@@ -35,7 +35,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='./assets/dougdoug.ico',
+    icon='./assets/logo.ico',
 )
 
 import shutil
